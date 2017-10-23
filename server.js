@@ -21,7 +21,7 @@ app.get('/destinations', function(req, res) {
   }
 
   // direct way
-  client.post(ELASTIC_SEARCH_SERVER + "console/golf/_search", args, function(data, response) {
+  client.post(ELASTIC_SEARCH_SERVER + "/golf/_search", args, function(data, response) {
     var destinations = _.map(data.aggregations.results.buckets, function(bucket){
       console.log(bucket);
       return {

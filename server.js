@@ -1,5 +1,6 @@
 var config = require('./config.js')
 var express = require('express')
+var _ = require('lodash');
 var app = express()
 var Client = require('node-rest-client').Client;
 
@@ -21,8 +22,15 @@ app.get('/destinations', function(req, res) {
 
   // direct way
   client.post(ELASTIC_SEARCH_SERVER + "console/golf/_search", args, function(data, response) {
+    var destinations = _.map(data.aggregations.results.buckets, function(bucket){
+      return {
+        name : bucket.key,
+        rating : bucket.rating.value
+      }
+    });
+
     // raw response
-    res.send(data);
+    res.send(destinations);
   });
 })
 

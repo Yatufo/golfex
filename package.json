@@ -13,7 +13,6 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "test",
     "prestart": "npm install",
     "start": "node server.js"
   },

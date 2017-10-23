@@ -23,9 +23,11 @@ app.get('/destinations', function(req, res) {
   // direct way
   client.post(ELASTIC_SEARCH_SERVER + "console/golf/_search", args, function(data, response) {
     var destinations = _.map(data.aggregations.results.buckets, function(bucket){
+      console.log(bucket);
       return {
         name : bucket.key,
-        rating : bucket.rating.value
+        rating : bucket.rating.value,
+        coords: bucket.geo.location
       }
     });
 
